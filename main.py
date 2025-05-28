@@ -9,10 +9,9 @@ import aiosqlite
 from datetime import datetime
 import os
 
-# Default database path
 DEFAULT_DB_PATH = "weather.db"
 
-# Database initialization
+
 async def init_db():
     db_path = getattr(app.state, "db_path", DEFAULT_DB_PATH)
     async with aiosqlite.connect(db_path) as db:
@@ -36,13 +35,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# Mount static files
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# Helper function to get weather data
+
 async def get_weather_data(city: str):
-    # First, get coordinates for the city
     async with httpx.AsyncClient() as client:
         geocoding_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1"
         response = await client.get(geocoding_url)
@@ -54,7 +52,7 @@ async def get_weather_data(city: str):
         location = data["results"][0]
         lat, lon = location["latitude"], location["longitude"]
         
-        # Get weather forecast
+
         weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&hourly=temperature_2m,weather_code&timezone=auto"
         response = await client.get(weather_url)
         weather_data = response.json()
@@ -84,7 +82,7 @@ async def search_weather(
     city: str = Form(...),
     user_id: str | None = Cookie(default=None)
 ):
-    # Generate user_id if not exists
+   
     if not user_id:
         user_id = os.urandom(16).hex()
     
@@ -95,7 +93,7 @@ async def search_weather(
             status_code=404
         )
     
-    # Save search to history
+   
     db_path = getattr(app.state, "db_path", DEFAULT_DB_PATH)
     async with aiosqlite.connect(db_path) as db:
         await db.execute(
