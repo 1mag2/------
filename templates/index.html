@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">Прогноз погоды</h1>
+                        
+                        {% if last_city %}
+                        <div class="alert alert-info" role="alert">
+                            Последний поиск: <a href="#" onclick="searchCity('{{ last_city }}')" class="alert-link">{{ last_city }}</a>
+                        </div>
+                        {% endif %}
+
+                        <div class="search-container mb-4">
+                            <input type="text" id="cityInput" class="form-control" placeholder="Введите название города..." autocomplete="off">
+                            <div id="suggestions" class="suggestions-container"></div>
+                        </div>
+
+                        <div id="loading" class="text-center d-none">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Загрузка...</span>
+                            </div>
+                        </div>
+
+                        <div id="error" class="alert alert-danger d-none" role="alert"></div>
+
+                        <div id="weatherResult" class="d-none">
+                            <div class="current-weather">
+                                <h2 class="city-name mb-3"></h2>
+                                <div class="current-conditions">
+                                    <div class="temperature display-4"></div>
+                                    <div class="weather-description"></div>
+                                    <div class="weather-details mt-3">
+                                        <div class="humidity"></div>
+                                        <div class="wind"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hourly-forecast mt-4">
+                                <h3>Прогноз на 24 часа</h3>
+                                <div class="hourly-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h3>Популярные запросы</h3>
+                        <div id="searchStats"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 

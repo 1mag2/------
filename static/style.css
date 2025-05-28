@@ -1,0 +1,110 @@
+body {
+    background-color: #f5f6fa;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.current-weather {
+    text-align: center;
+}
+
+.temperature {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #2d3436;
+}
+
+.weather-description {
+    font-size: 1.2rem;
+    color: #636e72;
+    margin-top: 10px;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #636e72;
+}
+
+.hourly-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 15px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.hourly-item {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    min-width: 80px;
+}
+
+.hourly-item .time {
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.hourly-item .temp {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #2d3436;
+    margin: 5px 0;
+}
+
+#searchStats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stat-item {
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.stat-count {
+    background-color: #007bff;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+    font-size: 0.8rem;
+} 
