@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const error = document.getElementById('error');
     
     let debounceTimer;
-    
-    // Load search stats on page load
+ 
     loadSearchStats();
     
     cityInput.addEventListener('input', function() {
@@ -61,8 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
-    // Close suggestions when clicking outside
+ 
     document.addEventListener('click', function(e) {
         if (!cityInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
             suggestionsContainer.style.display = 'none';
@@ -103,19 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayWeather(data) {
         const weatherResult = document.getElementById('weatherResult');
         weatherResult.classList.remove('d-none');
-        
-        // Update city name
+ 
         weatherResult.querySelector('.city-name').textContent = `${data.city}, ${data.country}`;
-        
-        // Update current conditions
+ 
         weatherResult.querySelector('.temperature').textContent = `${Math.round(data.current.temperature_2m)}°C`;
         weatherResult.querySelector('.humidity').textContent = `Влажность: ${data.current.relative_humidity_2m}%`;
         weatherResult.querySelector('.wind').textContent = `Ветер: ${data.current.wind_speed_10m} км/ч`;
-        
-        // Update weather description based on weather code
+ 
         weatherResult.querySelector('.weather-description').textContent = getWeatherDescription(data.current.weather_code);
-        
-        // Update hourly forecast
+ 
         const hourlyContainer = weatherResult.querySelector('.hourly-container');
         hourlyContainer.innerHTML = '';
         
